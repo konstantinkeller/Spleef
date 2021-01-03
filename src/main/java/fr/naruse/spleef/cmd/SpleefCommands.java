@@ -10,13 +10,11 @@ import fr.naruse.spleef.spleef.GameType;
 import fr.naruse.spleef.spleef.type.Spleef;
 import fr.naruse.spleef.utils.SpleefUpdater;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.List;
 
 public class SpleefCommands implements CommandExecutor {
@@ -62,7 +60,7 @@ public class SpleefCommands implements CommandExecutor {
         if(args[0].equalsIgnoreCase("stats")){
             OfflinePlayer target = p;
             if(args.length > 1){
-                target = Bukkit.getOfflinePlayer(args[1]);
+                target = Bukkit.getOfflinePlayer(java.util.UUID.fromString(args[1]));
             }
             if(target == null){
                 return sendMessage(sender, "playerNotFound");
@@ -160,6 +158,7 @@ public class SpleefCommands implements CommandExecutor {
             if(pl.getHolographicManager() != null){
                 pl.getHolographicManager().reloadLines();
             }
+            pl.getConfigurations().reload();
             return sendMessage(sender, "reload");
         }
 
@@ -386,7 +385,7 @@ public class SpleefCommands implements CommandExecutor {
                 return sendMessage(sender, "gameAlreadyStarted");
             }
             if(spleef.getPlayerInGame().size() < spleef.getMin()){
-                return sendMessage(sender, "tooManyPlayers");
+                return sendMessage(sender, "notEnoughPlayers", new String[]{"size", "min"}, new String[]{spleef.getPlayerInGame().size()+"", spleef.getMin()+""});
             }
             spleef.start();
             return sendMessage(sender, "gameStarted");
@@ -539,7 +538,7 @@ public class SpleefCommands implements CommandExecutor {
             if(args.length < 4){
                 return help(sender, 3);
             }
-            OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+            OfflinePlayer target = Bukkit.getOfflinePlayer(java.util.UUID.fromString(args[1]));
             int value;
             try{
                 value = Integer.valueOf(args[3]);
