@@ -71,8 +71,8 @@ public class Listeners implements Listener {
                     spleef.removePlayer(p);
                 }
                 e.setCancelled(true);
+                return;
             }
-            return;
         }
         if(e.getClickedBlock() == null){
             return;

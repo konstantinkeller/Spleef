@@ -78,6 +78,9 @@ public class Spleef extends BukkitRunnable implements Listener {
                 if(time <= 0){
                     start();
                 }else{
+                    if (time == pl.getConfig().getInt("timer.start")) {
+                        Bukkit.broadcastMessage(pl.getMessageManager().get("gameStartingSoon", new String[]{"seconds", "name"}, new String[]{Integer.toString(time), name}));
+                    }
                     time--;
                     scoreboardSign.getObjective().setDisplayName(pl.getMessageManager().get("scoreboard.scoreboardName", new String[]{"name", "time"}, new String[]{getFullName(), time+""}));
                 }
@@ -213,6 +216,9 @@ public class Spleef extends BukkitRunnable implements Listener {
         }
 
         p.setScoreboard(scoreboardSign.getScoreboard());
+        if (playerInGame.size() == 0) {
+            Bukkit.broadcastMessage(pl.getMessageManager().get("gameCreated", new String[]{"player", "name"}, new String[]{p.getName(), name}));
+        }
         playerInGame.add(p);
 
         sendMessage(getFullName() +" "+ pl.getMessageManager().get("joinSpleef", new String[]{"name"}, new String[]{p.getName()}));

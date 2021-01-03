@@ -47,6 +47,8 @@ english:
   leaveSpleef: "§7§l> §d{name}§c leave this game."
   joinSpleef: "§7§l> §d{name}§a join this game."
   inGame: "§cIn game."
+  gameCreated: "§7§l> §6{player} has created a spleef game! Join with /spleef join {name}"
+  gameStartingSoon: "§7§l> §6A spleef game is starting in {seconds} seconds! Join with /spleef join {name}"
   gameStarts: "§7§l> §2Game starts!"
   youHaveAGame: "§cYou already are in game."
   spadeDeliverIn: "§7§l> §aYour spade come in 5 seconds."
